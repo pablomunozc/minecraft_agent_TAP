@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "uuid": "05c1d4ae-4a12-3fcb-8d2b-697bce6d1ea8",
+    "name": "Pamuca1000",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  }
+]

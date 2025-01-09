@@ -98,6 +98,10 @@ class AgentManager:
     
     def stop(self, agent_number):
         self.agents[agent_number].stop()
+    
+    def kill(self, agent_number):
+        self.stop(agent_number)
+        self.agents.remove(self.agents[agent_number])
 
 class BaseAgent:
     def __init__(self, name):
@@ -117,7 +121,10 @@ class BaseAgent:
         raise NotImplementedError("This method should be overridden.")
 
     def stop(self):
-        self.running = False
+        self.active = False
+
+    def postToChat(self, message):
+        self.mc.postToChat("["+self.name+"] " + message)
 
 
 

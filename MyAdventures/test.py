@@ -1,5 +1,6 @@
 import MinecraftAgent
 from mcpi import block as Block
+from transformers import pipeline
 import time
 import re
 
@@ -60,8 +61,22 @@ class DiamondAgent(MinecraftAgent.BaseAgent):
                 pos = self.mc.entity.getPos(message.entityId)
                 self.mc.entity.setPos(message.entityId, pos.x, pos.y+30, pos.z)
 
+class ChatBot(MinecraftAgent.BaseAgent):
+    def __init__(self, name):
+        super().__init__(name)
+        self.chatbot=pipeline(task="text2text-generation", model="facebook/blenderbot-400M-distill")
+    def execute(self):
+        chat = self.mc.events.pollChatPosts()
+        for message in chat:
+            if message.message[0]!='!':
+                user_message=message.message
+                for text in self.chatbot(user_message, max_new_tokens=100):
+                    self.postToChat(text["generated_text"])
+
+
 
 manager = MinecraftAgent.AgentManager()
 manager.register(MainAgent("Manager", manager))
 manager.register(DiamondAgent("Carlota"))
+manager.register(ChatBot("Jesus"))
 manager.start_all()

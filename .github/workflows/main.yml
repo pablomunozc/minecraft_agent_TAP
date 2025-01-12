@@ -1,3 +1,3 @@
-              - name: Create Coverage Badges
-                uses: jaywcjlove/coverage-badges-cli@v2.1.0
+              - name: Coveralls GitHub Action
+                uses: coverallsapp/github-action@v2.3.4
             

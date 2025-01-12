@@ -90,8 +90,9 @@ class ChatAgent(MinecraftAgent.BaseAgent):
     def execute(self):
         chat = self.mc.events.pollChatPosts()
         for message in chat:
-            if message.message[0]!='!':
-                user_message=message.message
+            palabras=message.message.split()
+            if palabras[0]=="Hey" and palabras[1]==self.name:
+                user_message="".join(palabras[2:])
                 for text in self.chatbot(user_message, max_new_tokens=100):
                     self.postToChat(text["generated_text"])
 

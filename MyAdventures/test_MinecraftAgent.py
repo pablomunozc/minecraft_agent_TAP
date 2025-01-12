@@ -5,16 +5,18 @@ from MinecraftAgent import AgentManager, BaseAgent
 
 class TestBaseAgent:
     def test_start_sets_active_to_true(self):
-        agent = BaseAgent("TestAgent")
-        agent.run = MagicMock()  # Evitamos ejecutar el bucle run
-        agent.start()
-        assert agent.active is True
+        with patch("MinecraftAgent.Minecraft.Minecraft.create") as mock_mc:
+            agent = BaseAgent("TestAgent")
+            agent.run = MagicMock()  # Evitamos ejecutar el bucle run
+            agent.start()
+            assert agent.active is True
 
     def test_stop_sets_active_to_false(self):
-        agent = BaseAgent("TestAgent")
-        agent.active = True
-        agent.stop()
-        assert agent.active is False
+        with patch("MinecraftAgent.Minecraft.Minecraft.create") as mock_mc:
+            agent = BaseAgent("TestAgent")
+            agent.active = True
+            agent.stop()
+            assert agent.active is False
 
     def test_post_to_chat_calls_mc_method(self):
         with patch("MinecraftAgent.Minecraft.Minecraft.create") as mock_mc:

@@ -5,9 +5,10 @@ import time
 import re
 
 class MainAgent(MinecraftAgent.BaseAgent):
-    def __init__(self, name, manager):
+    def __init__(self, name, manager, list):
         super().__init__(name)
         self.manager = manager
+        self.agent_list = list
 
     def execute(self):
         chat = self.mc.events.pollChatPosts()
@@ -15,8 +16,25 @@ class MainAgent(MinecraftAgent.BaseAgent):
                 words = message.message.split()
                 if (words[0] == "!agent"):
                     match (words[1]):
-                        case "create":
-                            self.postToChat("not implemented yet")
+                        case "register":
+                            if (len(words) < 3):
+                                self.postToChat("Usage: !agent register <agent_class> <agent_name>")
+                                self.postToChat("For a list of possible agent classes, check '!agent register list'")
+                            elif (words[2] == "list"):
+                                self.postToChat("List of possible agent classes:")
+                                for a in self.agent_list:
+                                    self.postToChat("   -> " + a.__name__)
+                            elif (len(words) < 4):
+                                self.postToChat("Usage: !agent register <agent_class> <agent_name>")
+                                self.postToChat("For a list of possible agent classes, check '!agent register list'")
+                            else:
+                                for a in self.agent_list:
+                                    if (a.__name__ == words[2]):
+                                        new = a(words[3])
+                                        manager.register(new)
+                                        new.start()
+                                        self.postToChat("Started new " + a.__name__ + ": " + words[3])
+                                        
                         case "list":
                             self.postToChat("There are currently " + str(len(manager.agents)) + " agents:")
                             for agent in manager.agents:
@@ -28,13 +46,17 @@ class MainAgent(MinecraftAgent.BaseAgent):
                                 self.postToChat("You can't kill me!")
                             else:
                                 agents = manager.agents.copy()
+                                i = 0
                                 for agent in agents:
                                     if (agent.name == words[2]):
                                         manager.kill(manager.agents.index(agent))
                                         self.postToChat("Killed " + agent.name + " agent")
+                                        i = i + 1
+                                if (i == 0):
+                                    self.postToChat("Agent named " + words[2] + " not found")
                         case "help":
                             self.postToChat("Manager commands:")
-                            self.postToChat("   -> create: creates a new Agent")
+                            self.postToChat("   -> register: registers a new Agent from a set list")
                             self.postToChat("   -> list: returns the list of current agents")
                             self.postToChat("   -> kill: stops an active agent")
                         case _:
@@ -61,7 +83,7 @@ class DiamondAgent(MinecraftAgent.BaseAgent):
                 pos = self.mc.entity.getPos(message.entityId)
                 self.mc.entity.setPos(message.entityId, pos.x, pos.y+30, pos.z)
 
-class ChatBot(MinecraftAgent.BaseAgent):
+class ChatAgent(MinecraftAgent.BaseAgent):
     def __init__(self, name):
         super().__init__(name)
         self.chatbot=pipeline(task="text2text-generation", model="facebook/blenderbot-400M-distill")
@@ -76,7 +98,5 @@ class ChatBot(MinecraftAgent.BaseAgent):
 
 
 manager = MinecraftAgent.AgentManager()
-manager.register(MainAgent("Manager", manager))
-manager.register(DiamondAgent("Carlota"))
-manager.register(ChatBot("Jesus"))
+manager.register(MainAgent("Manager", manager, [DiamondAgent, TestAgent, ChatAgent]))
 manager.start_all()

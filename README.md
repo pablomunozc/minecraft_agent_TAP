@@ -1,3 +1,4 @@
+[![Coverage Status](https://coveralls.io/repos/github/pablomunozc/minecraft_agent_TAP/badge.svg?branch=main)](https://coveralls.io/github/pablomunozc/minecraft_agent_TAP?branch=main)
 # Windows PC Starter Kit
 
 Martin O'Hanlon

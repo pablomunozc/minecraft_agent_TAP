@@ -11,7 +11,7 @@ Based on book: "Adventures in Minecraft" written by David Whale and Martin O'Han
 
 This repository implements a Python framework enabling the development and execution of Python coded agents in a Shared Minecraft server.
 
-The structure of the StarterKit is as follows:
+The structure of the project is as follows:
 
 * minecraft_agent_TAP
   * Server : contains the pre-configured minecraft server and raspberry juice plugin
@@ -19,7 +19,8 @@ The structure of the StarterKit is as follows:
     * mcpi : python api library distributed with Minecraft: Pi Edition and minecraftstuff libraries
     * MinecraftAgent.py : python file that works as the agent framework
     * example.py : python file that has examples of different agents and includes everything to execute them
-    * test_MinecraftAgent.py : python test file for code coverage purposes  
+    * test_MinecraftAgent.py : python test file for MinecraftAgent.py
+    * test_example.py : python test file for example.py
   * StartServer.bat : a batch file used to start the minecraft server
 
 ## The Framework
@@ -27,3 +28,9 @@ The structure of the StarterKit is as follows:
 ```
 in development
 ```
+
+## Code coverage
+
+The code has been tested using 'pytest'.
+
+The file test_MinecraftAgent.py makes tests for MinecraftAgent.py, while test_example.py makes tests for example.py

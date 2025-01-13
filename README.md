@@ -37,7 +37,6 @@ stop(): Stops the execution of a specific agent. It is called from BaseAgent.
 kill(): Stops and removes a specific agent registered at the position `agent_number`.
 kill_all(): Stops and removes all registered agents.
 
----
 
 ## BaseAgent
 The BaseAgent class is the class which all the agents inherits, and makes him interact with the Minecraft server.

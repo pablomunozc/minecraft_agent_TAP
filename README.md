@@ -26,7 +26,29 @@ The structure of the project is as follows:
 ## The Framework
 
 ```
-in development
+## AgentManager
+The AgentManager class manages all the agents in the Minecraft server. This class is Singleton, so it is the only one which can exist to manage all the other agents.
+
+register(agent):  Registers a new agent with the manager.  
+start_all():  Activates and runs all registered agents.
+stop_all():  Stops all registered agents.
+start(): Starts the execution of a specific agent. It is called from BaseAgent.
+stop(): Stops the execution of a specific agent. It is called from BaseAgent.
+kill(): Stops and removes a specific agent registered at the position `agent_number`.
+kill_all(): Stops and removes all registered agents.
+
+---
+
+## BaseAgent
+The BaseAgent class is the class which all the agents inherits, and makes him interact with the Minecraft server.
+
+start(): Activates the agent and starts its execution.
+run(): The agent's main loop. While the agent is active, it repeatedly calls the `execute` method.
+execute(): Abstract method that must be implemented by derived classes. Defines the actions the agent must do.  
+stop(): Stops the agent's execution.
+postToChat(message):  Sends a message to the Minecraft server's chat with the Agent name.
+```
+
 ```
 
 ## Code coverage

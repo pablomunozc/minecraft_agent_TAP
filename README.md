@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/pablomunozc/minecraft_agent_TAP/badge.svg?branch=main)](https://coveralls.io/github/pablomunozc/minecraft_agent_TAP?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/pablomunozc/minecraft_agent_TAP/badge.svg)](https://coveralls.io/github/pablomunozc/minecraft_agent_TAP?branch=main)
 # Minecraft Agent Framework
 
 Pablo Muñoz Castro | Adrià Montagut Serres
@@ -78,4 +78,4 @@ The code has been tested using 'pytest'.
 The file test_MinecraftAgent.py makes tests for MinecraftAgent.py, while test_example.py makes tests for example.py
 
 Also, the repository has a Github Action that updates the code coverage percentage every time a push is made, using pytest, pytest-cov and coveralls:
-[![Coverage Status](https://coveralls.io/repos/github/pablomunozc/minecraft_agent_TAP/badge.svg?branch=main)](https://coveralls.io/github/pablomunozc/minecraft_agent_TAP?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/pablomunozc/minecraft_agent_TAP/badge.svg)](https://coveralls.io/github/pablomunozc/minecraft_agent_TAP?branch=main)

@@ -47,7 +47,6 @@ run(): The agent's main loop. While the agent is active, it repeatedly calls the
 execute(): Abstract method that must be implemented by derived classes. Defines the actions the agent must do.  
 stop(): Stops the agent's execution.
 postToChat(message):  Sends a message to the Minecraft server's chat with the Agent name.
-```
 
 ```
 
